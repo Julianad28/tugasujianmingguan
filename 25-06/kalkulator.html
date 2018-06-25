@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>Latihan Java Script</title>
+			<link rel="stylesheet" href="bootstrap/dist/css/bootstrap.min.css">
+		<style type="text/css">
+			body {
+				background-color: #d9d9d9;
+				margin:auto;
+				width:900px;
+			}
+		.header{
+				background: #d9d9d9;
+				text-align:center;}
+				
+		.navbar-left{
+			background-color:#009973;
+			width:665px;
+			padding:5px;
+			}
+		.article {
+				clear: both;
+				background-color: #ffffff;
+				padding:10px;
+				text-align:left;}
+		
+		a {color:white;}
+		
+		
+		
+	</style>
+	<body>
+		<div class="header">
+			<h2><b> HITUNG SEWA TRAVEL </b></h2>
+			<br>
+		<div class="row">
+				<div class="col-md-9">
+					<nav class="navbar navbar-justified navbar">
+						<ul class="nav navbar-nav navbar-left">
+							<li><a href="new 1.html">HOME</a></li>
+							<li><a href ="kalkulator.html">HITUNG</a></li>
+						</ul>
+					</nav>
+			<div class="article">
+		<table>
+			<tr>
+				<td>
+					<label for="nama" > Nama Pemesan : </label>
+				</td>
+				<td>
+					<input type="text" id="nama">
+				</td>
+			</tr>
+			<tr>
+			<td>
+						<label for="jurusan" > Jurusan  </label>
+					</td>
+					<td>
+						<Select id="jurusan">
+						<option value="BSD-Bandung">BSD-Bandung </option>
+						<option value="Bandung-BSD">Bandung-BSD</option>
+						<option value="BSD-Bandara">BSD-Bandara </option>
+						<option value="Bandara-BSD">Bandara-BSD</option>
+						
+					</td>
+			</tr>
+			<tr>
+					<td>
+							<label for="status"> Jam Keberangkatan : </label>
+					<td> 	<input type="radio" value="pagi" id="rad1">10.00
+							<input type="radio" value="Malem" id="rad2">22.00
+					</td>
+
+					</td>
+			</tr>
+			<tr>
+					<td>
+						<label for="jumlah_pesanan">	Jumlah Pesanan : </label>
+					</td>
+					<td>
+						<input type="number" id="jumlah_pesanan">
+					</td>
+			</tr>
+			<br>
+
+			 <tr>
+					<td> <input type="submit" name="submit_button" value="hitung" onclick="kirim();">
+					<input type="reset" name="reset_button" value="reset"> </td>
+			 </tr>		
+			<tr>
+					<td>
+						<label for="alamat"> HASIL HITUNG : </label>
+						<textarea name="alamat" cols="40" rows="2" id="hasilhitung" ></textarea>
+					</td>
+			</tr>
+		</table>
+			<div class="col-md-3">
+			</div>
+		<script type="text/javascript">
+		function kirim(){
+				var hasilhitung=null;
+					//ambil nama
+					var nama=document.getElementById("nama").value;
+					//ambil jurusan
+					var jurusan=document.getElementById("jurusan").value;
+					//ambil jumlah pesanan
+					var jumlah_pesanan=document.getElementById("jumlah_pesanan").value;
+					//deklarasi variabel untuk radio(waktu)
+					var radio1=document.getElementById("rad1");
+					var radio2=document.getElementById("rad2");
+					//variabel untuk menghitung-hitung
+					var status,harga,total,diskon,bayar;
+					//variabel agar tidak ada data kosong
+					if (nama!="" && jumlah_pesanan!="" && jurusan!="" && (radio1.checked||radio2.checked)){
+						//kondisi untuk cek jurusan dan menetepkan harga
+						if(jurusan=="BSD-Bandung"){
+							harga=100000;
+							}
+						else if (jurusan=="Bandung-BSD"){
+							harga=120000;
+							}
+						else if (jurusan=="Bandara-BSD"){
+							harga=90000;
+							}
+						else if (jurusan=="BSD-Bandara"){
+							harga=80000;
+							}
+						// menghitung total dari harga * jumlah kursi
+						total=harga*jumlah_pesanan;
+						//mengecek status member dan menghitung diskon
+						if(radio1.checked)
+						{
+							status="10.00";
+							diskon=total;
+						}
+						else if (radio2.checked)
+						{
+							status="22.00";
+							diskon=total*0.1;
+						}
+						//menghitung total bayar yaitu total-diskon
+						bayar=total-diskon;
+						//mencetakk data di textarea
+						document.getElementById("hasilhitung").innerHTML="Nama Pemesan : "+nama+ "\n"
+																	+"Jurusan : " +jurusan+ "\n"
+																	+"Keberangkatan : "+status+" Maka Diskon "+diskon+ "\n"
+																	+"Biaya Total : " +bayar;
+																}
+					else
+					{
+							//allert jika ada yg belum diisi
+							alert("Lengkapi terlebih dahulu");}
+					
+				
+				}
+				
+		</script>
+	</body>
+</html>
